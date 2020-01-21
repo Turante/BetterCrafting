@@ -17,18 +17,22 @@
 			"Deluxe Speed-Gro",
 			"Basic Retaining Soil",
 			"Quality Retaining Soil",
-			
-			"Spring Seeds",
-			"Summer Seeds",
-			"Fall Seeds",
-			"Winter Seeds",
+			"Tree Fertilizer",
+
+			"Wild Seeds (Sp)",
+			"Wild Seeds (Su)",
+			"Wild Seeds (Fa)",
+			"Wild Seeds (Wi)",
 			"Ancient Seeds",
-			
+			"Grass Starter",
+			"Tea Sapling",
+
 			"Sprinkler",
 			"Quality Sprinkler",
 			"Iridium Sprinkler",
-			
+
 			"Scarecrow",
+			"Deluxe Scarecrow",
 			"Garden Pot"
 		],
 		"bombs": [
@@ -57,7 +61,8 @@
 			"Gravel Path",
 			"Crystal Path",
 			"Crystal Floor",
-			"Cobblestone Path"
+			"Cobblestone Path",
+      "Brick Floor"
 		],
 		"fishing": [
 			"Spinner",
