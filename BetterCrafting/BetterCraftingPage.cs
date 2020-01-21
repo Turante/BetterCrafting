@@ -123,7 +123,7 @@ namespace BetterCrafting
                 var y = this.yPositionOnScreen + tabPad + catIndex * (height + categorySpacing);
 
                 var c = new ClickableComponent(
-                    new Rectangle((int) x, (int) y, (int) width, (int) height),
+                    new Rectangle((int)x, (int)y, (int)width, (int)height),
                     category.Equals(this.selectedCategory) ? UNAVAILABLE : AVAILABLE, catName);
                 c.myID = id;
                 c.upNeighborID = id - 1;
@@ -162,8 +162,6 @@ namespace BetterCrafting
                 Game1.mouseCursors,
                 new Rectangle(162, 440, 16, 16),
                 (float)Game1.pixelZoom, false);
-            if (!Game1.player.hasOrWillReceiveMail("canReadJunimoText") || Game1.player.hasOrWillReceiveMail("JojaMember") || Game1.MasterPlayer.hasCompletedCommunityCenter() && (!Utility.doesMasterPlayerHaveMailReceivedButNotMailForTomorrow("hasSeenAbandonedJunimoNote") || Game1.MasterPlayer.hasOrWillReceiveMail("ccMovieTheater")))
-                return;
             ClickableTextureComponent textureComponent3 = new ClickableTextureComponent("", new Rectangle(this.xPositionOnScreen + width, this.yPositionOnScreen + 96, 64, 64), "", Game1.content.LoadString("Strings\\UI:GameMenu_JunimoNote_Hover"), Game1.mouseCursors, new Rectangle(331, 374, 15, 14), 4f, false);
             textureComponent3.myID = 898;
             textureComponent3.leftNeighborID = 11;
@@ -388,7 +386,7 @@ namespace BetterCrafting
                 this.recipePage += 1;
 
                 Game1.playSound("shwip");
-            }            
+            }
 
             this.UpdateScrollButtons();
         }
@@ -606,7 +604,7 @@ namespace BetterCrafting
                 else
                 {
                     this.inventory.applyMovementKey(direction);
-                }                
+                }
 
                 return;
             }
@@ -619,7 +617,7 @@ namespace BetterCrafting
                     if (snappedId == 0)
                     {
                         var gameMenu = (GameMenu)Game1.activeClickableMenu;
-                        if (this.junimoNoteIcon!= null)
+                        if (this.junimoNoteIcon != null)
                         {
                             this.currentlySnappedComponent = this.junimoNoteIcon;
                         }
