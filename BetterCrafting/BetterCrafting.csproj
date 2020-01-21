@@ -11,6 +11,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+         <Content Include="categories.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <PackageReference Include="Pathoschild.Stardew.ModBuildConfig" Version="3.0.0" />
   </ItemGroup>
 
