@@ -4,6 +4,9 @@ using Microsoft.Xna.Framework.Input;
 using StardewModdingAPI;
 using StardewValley;
 using StardewValley.Menus;
+using StardewValley.Objects;
+using StardewValley.Characters;
+using StardewValley.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,7 +46,8 @@ namespace BetterCrafting
 
         private ClickableTextureComponent trashCan;
         private float trashCanLidRotation;
-
+        public ClickableTextureComponent junimoNoteIcon;
+        protected List<Chest> _materialContainers;
         private ClickableComponent throwComp;
 
         private ClickableTextureComponent oldButton;
@@ -63,9 +67,15 @@ namespace BetterCrafting
         private int snappedId = 0;
         private int snappedSection = 1;
 
-        public BetterCraftingPage(ModEntry betterCrafting, CategoryData categoryData, Nullable<ItemCategory> defaultCategory)
+        public BetterCraftingPage(
+            ModEntry betterCrafting,
+            CategoryData categoryData,
+            Nullable<ItemCategory> defaultCategory,
+            List<Chest> material_containers = null)
             : base(Game1.activeClickableMenu.xPositionOnScreen, Game1.activeClickableMenu.yPositionOnScreen, Game1.activeClickableMenu.width, Game1.activeClickableMenu.height)
         {
+            this._materialContainers = material_containers;
+            List<Chest> materialContainers = this._materialContainers;
             this.betterCrafting = betterCrafting;
 
             this.categoryManager = new CategoryManager(betterCrafting.Monitor, categoryData);
@@ -152,7 +162,13 @@ namespace BetterCrafting
                 Game1.mouseCursors,
                 new Rectangle(162, 440, 16, 16),
                 (float)Game1.pixelZoom, false);
-
+            if (!Game1.player.hasOrWillReceiveMail("canReadJunimoText") || Game1.player.hasOrWillReceiveMail("JojaMember") || Game1.MasterPlayer.hasCompletedCommunityCenter() && (!Utility.doesMasterPlayerHaveMailReceivedButNotMailForTomorrow("hasSeenAbandonedJunimoNote") || Game1.MasterPlayer.hasOrWillReceiveMail("ccMovieTheater")))
+                return;
+            ClickableTextureComponent textureComponent3 = new ClickableTextureComponent("", new Rectangle(this.xPositionOnScreen + width, this.yPositionOnScreen + 96, 64, 64), "", Game1.content.LoadString("Strings\\UI:GameMenu_JunimoNote_Hover"), Game1.mouseCursors, new Rectangle(331, 374, 15, 14), 4f, false);
+            textureComponent3.myID = 898;
+            textureComponent3.leftNeighborID = 11;
+            textureComponent3.downNeighborID = 106;
+            this.junimoNoteIcon = textureComponent3;
             this.UpdateInventory();
         }
 
@@ -603,9 +619,9 @@ namespace BetterCrafting
                     if (snappedId == 0)
                     {
                         var gameMenu = (GameMenu)Game1.activeClickableMenu;
-                        if (gameMenu.junimoNoteIcon != null)
+                        if (this.junimoNoteIcon!= null)
                         {
-                            this.currentlySnappedComponent = gameMenu.junimoNoteIcon;
+                            this.currentlySnappedComponent = this.junimoNoteIcon;
                         }
                         else
                         {
@@ -949,7 +965,7 @@ namespace BetterCrafting
 
             if (this.heldItem == null)
             {
-                recipe.consumeIngredients();
+                recipe.consumeIngredients(this._materialContainers);
                 this.heldItem = crafted;
 
                 if (playSound)
@@ -959,7 +975,7 @@ namespace BetterCrafting
             }
             else if (this.heldItem.Name.Equals(crafted.Name) && this.heldItem.Stack + recipe.numberProducedPerCraft - 1 < this.heldItem.maximumStackSize())
             {
-                recipe.consumeIngredients();
+                recipe.consumeIngredients(this._materialContainers);
                 this.heldItem.Stack += recipe.numberProducedPerCraft;
 
                 if (playSound)

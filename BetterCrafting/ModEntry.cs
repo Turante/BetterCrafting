@@ -19,7 +19,7 @@ namespace BetterCrafting
 
         public override void Entry(IModHelper helper)
         {
-            this.categoryData = this.Helper.ReadJsonFile<CategoryData>("categories.json");
+            this.categoryData = this.Helper.Data.ReadJsonFile<CategoryData>("categories.json");
             if (this.categoryData == null)
             {
                 this.Monitor.Log("Failed to read category data from 'categories.json'", LogLevel.Error);
@@ -28,11 +28,11 @@ namespace BetterCrafting
                 this.categoryData = new CategoryData();
             }
 
-            MenuEvents.MenuChanged += MenuChanged;
-            PlayerEvents.InventoryChanged += InventoryChanged;
+            Helper.Events.Display.MenuChanged += this.MenuChanged;
+            Helper.Events.Player.InventoryChanged += this.InventoryChanged;
         }
 
-        private void MenuChanged(object sender, EventArgsClickableMenuChanged e)
+        private void MenuChanged(object sender, MenuChangedEventArgs e)
         {
             if (e.NewMenu is GameMenu gameMenu)
             {
@@ -42,7 +42,7 @@ namespace BetterCrafting
             }
         }
 
-        private void InventoryChanged(object sender, EventArgsInventoryChanged e)
+        private void InventoryChanged(object sender, InventoryChangedEventArgs e)
         {
             if (Game1.activeClickableMenu is GameMenu gameMenu)
             {
