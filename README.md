@@ -1,3 +1,5 @@
+[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/strobel1ght/BetterCrafting) 
+
 # BetterCrafting
 A Stardew Valley mod that adds tabs to the crafting page
 
